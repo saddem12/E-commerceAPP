@@ -33,7 +33,8 @@ class ProductItem extends StatelessWidget {
             product.title,
             textAlign: TextAlign.center,
           ),
-          backgroundColor: Colors.black45,
+          backgroundColor: Colors.purple,
+          
         ),
         child: GestureDetector(
           onTap: () {
@@ -76,6 +77,18 @@ class ProductItem extends StatelessWidget {
                 product.title,
                 product.imageUrl,
               );
+              ScaffoldMessenger.of(context).hideCurrentSnackBar();
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text('Added item to cart!'),
+                  duration: Duration(
+                    seconds: 2,
+                  ),
+                  action: SnackBarAction(
+                    label: 'Cancel',
+                    onPressed: () {
+                      cart.removeSingleItem(product.id);
+                    },
+                  )));
             },
           ),
         ),
